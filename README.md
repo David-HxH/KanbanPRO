@@ -1,3 +1,3 @@
-## E5-M6 Ejercicio
+## E1-M7 Ejercicio
 
-### Gestor de Tareas por Consola
+### Configuración de la Conexión a la Base de Datos 🐘

@@ -1,6 +1,6 @@
 // app.js
 require('dotenv/config');
-// require('./config/db.js');
+require('./config/db.js');
 const express = require('express');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
