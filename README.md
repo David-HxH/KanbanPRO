@@ -1,3 +1,3 @@
-## E2-M7 Ejercicio
+## E3-M7 Ejercicio
 
-### Lectura de Datos y Consultas Seguras
+### Gestor de Tareas CRUD

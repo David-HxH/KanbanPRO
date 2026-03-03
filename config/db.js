@@ -24,4 +24,4 @@ async function verificarConexion() {
 
 verificarConexion();
 
-module.exports = pool;
+module.exports = { pool, verificarConexion };
