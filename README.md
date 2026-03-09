@@ -1,3 +1,3 @@
-## E5-M7 Ejercicio
+## E6-M7 Ejercicio
 
-### CRUD de Productos con Sequelize
+### Modelado de Relaciones en un Blog Básico

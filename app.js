@@ -1,38 +1,44 @@
 require('dotenv/config');
 
 const { sequelize } = require('./config/db');
-const Producto = require('./models/Producto');
+
+const Usuario = require('./models/Usuario');
+const Publicacion = require('./models/Publicacion');
+
+/* RELACIONES */
+
+Usuario.hasMany(Publicacion);
+Publicacion.belongsTo(Usuario);
 
 async function main() {
   try {
 
-    // sincroniza modelos con la BD
-    await sequelize.sync();
+    /* sincroniza las tablas */
+    await sequelize.sync({ force: true });
 
-    console.log('Tablas sincronizadas');
+    console.log("Tablas sincronizadas");
 
-    // CREATE
-    const nuevoProducto = await Producto.create({
-      nombre: 'Laptop',
-      precio: 1200
+    /* crear usuario */
+
+    const nuevoUsuario = await Usuario.create({
+      nombre: "Carlos",
+      email: "carlos@example.com",
     });
 
-    console.log(nuevoProducto);
+    /* crear publicación asociada */
 
-    // READ
-    const productos = await Producto.findAll();
-    console.log(productos);
-
-    // UPDATE
-    await Producto.update(
-      { precio: 1100 },
-      { where: { id: 1 } }
-    );
-
-    // DELETE
-    await Producto.destroy({
-      where: { id: 2 }
+    await nuevoUsuario.createPublicacion({
+      titulo: "Mi primera publicación",
+      contenido: "Este es el contenido de mi post, creado con Sequelize.",
     });
+
+    /* eager loading */
+
+    const usuarioConPublicaciones = await Usuario.findByPk(nuevoUsuario.id, {
+      include: Publicacion,
+    });
+
+    console.log(JSON.stringify(usuarioConPublicaciones, null, 2));
 
   } catch (error) {
     console.error(error);
