@@ -1,15 +1,14 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
 
-const Usuario = sequelize.define("Usuario", {
-  nombre: {
+const Tarjeta = sequelize.define("Tarjeta", {
+  titulo: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false
+  descripcion: {
+    type: DataTypes.TEXT
   }
 });
 
-module.exports = Usuario;
+module.exports = Tarjeta;

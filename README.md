@@ -1,3 +1,3 @@
-## E6-M7 Ejercicio
+## EF- M7 Proyecto integrador Sprint 2
 
-### Modelado de Relaciones en un Blog Básico
+### Proyecto: "KanbanPro" - Kick-off del Sprint 2
