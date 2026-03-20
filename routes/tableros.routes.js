@@ -2,15 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const verificarToken = require("../middleware/auth.middleware");
+const tablerosController = require("../controllers/tableros.controller");
 
-/* =========================
-   RUTA PROTEGIDA DE PRUEBA
-========================= */
-router.get("/", verificarToken, (req, res) => {
-  res.json({
-    mensaje: "Acceso autorizado a tableros",
-    usuario: req.usuario
-  });
-});
+// GET /api/tableros
+router.get("/", verificarToken, tablerosController.getTableros);
+
+// POST /api/tableros
+router.post("/", verificarToken, tablerosController.createTablero);
 
 module.exports = router;
