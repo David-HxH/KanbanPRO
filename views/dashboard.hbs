@@ -1,0 +1,37 @@
+<h1>{{board.name}}</h1>
+
+<h2>Agregar nueva tarjeta</h2>
+
+<form method="POST" action="/nueva-tarjeta">
+  <input
+    type="text"
+    name="title"
+    placeholder="Título de la tarea"
+    required
+  />
+
+  <select name="listId" required>
+    {{#each board.lists}}
+      <option value="{{this.id}}">{{this.name}}</option>
+    {{/each}}
+  </select>
+
+  <button type="submit">Agregar</button>
+</form>
+
+<div class="board-lists">
+
+  {{#each board.lists}}
+    <div class="list">
+      <h3>{{this.name}}</h3>
+
+      <ul>
+        {{#each this.cards}}
+          <li>{{this.title}}</li>
+        {{/each}}
+      </ul>
+
+    </div>
+  {{/each}}
+
+</div>

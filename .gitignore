@@ -1,8 +1,4 @@
 # ignorar
 node_modules/
 .env
-package-lock.json
-
-# ignorar --- POR EL MOMENTO ---
-models/Producto.js
 
