@@ -54,7 +54,11 @@ exports.login = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.json({ token });
+    res.cookie("token", token, {
+      httpOnly: true
+    });
+
+    res.json({ message: "Login exitoso" });
 
   } catch (error) {
     console.error("❌ ERROR LOGIN:", error);

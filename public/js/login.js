@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({ email, password })
       });
 
@@ -24,10 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // 🔑 AQUÍ VA EL PASO 4
-      localStorage.setItem("token", data.token);
-
-      // 🚀 redirigir
+      // redirigir
       window.location.href = "/dashboard";
 
     } catch (error) {

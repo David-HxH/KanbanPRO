@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const verificarToken = require("../middleware/auth.middleware");
+const { verificarToken } = require("../middlewares/auth.middleware");
 const tablerosController = require("../controllers/tableros.controller");
 
 // GET /api/tableros

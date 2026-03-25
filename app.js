@@ -5,10 +5,14 @@ const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
 const { Tablero, Lista, Tarjeta } = require("./models");
-const verificarToken = require("./middleware/auth.middleware"); // implementar a futuro
-
+const { verificarUsuario } = require("./middlewares/auth.middleware");
+const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = 3000;
+
+app.use(cookieParser());
+
+
 
 /* MIDDLEWARE GLOBAL */
 app.use(express.json());
@@ -33,32 +37,29 @@ app.get("/login", (req, res) => {
   res.render("login", { title: "Login" });
 });
 
-app.get("/dashboard", async (req, res) => {
+app.get("/dashboard", verificarUsuario, async (req, res) => {
   try {
-    const userId = 1;
+    const userId = req.usuario.id;
 
     let tablero = await Tablero.findOne({
-        where: { userId },
+      where: { userId },
+      include: {
+        model: Lista,
+        as: "listas",
         include: {
-            model: Lista,
-            as: "listas",
-            include: {
-            model: Tarjeta,
-            as: "tarjetas"
-            }
+          model: Tarjeta,
+          as: "tarjetas",
         },
-        order: [
-            [{ model: Lista, as: "listas" }, "orden", "ASC"]
-        ]
+      },
+      order: [[{ model: Lista, as: "listas" }, "orden", "ASC"]],
     });
 
     // SI NO EXISTE → CREAR AUTOMÁTICAMENTE
     if (!tablero) {
-
       // Crear tablero
       const nuevoTablero = await Tablero.create({
         titulo: "Mi tablero",
-        userId
+        userId,
       });
 
       // Crear listas base
@@ -68,8 +69,8 @@ app.get("/dashboard", async (req, res) => {
         listasBase.map((nombre, index) => ({
           titulo: nombre,
           tableroId: nuevoTablero.id,
-          orden: index
-        }))
+          orden: index,
+        })),
       );
 
       // Volver a consultar con relaciones
@@ -80,33 +81,30 @@ app.get("/dashboard", async (req, res) => {
           as: "listas",
           include: {
             model: Tarjeta,
-            as: "tarjetas"
-          }
+            as: "tarjetas",
+          },
         },
-          order: [
-            [{ model: Lista, as: "listas" }, "orden", "ASC"]
-          ]
-        });
+        order: [[{ model: Lista, as: "listas" }, "orden", "ASC"]],
+      });
     }
 
     // TRANSFORMACIÓN (clave)
     const board = {
       name: tablero.titulo,
-      lists: tablero.listas.map(lista => ({
+      lists: tablero.listas.map((lista) => ({
         id: lista.id,
         name: lista.titulo,
-        cards: lista.tarjetas.map(t => ({
+        cards: lista.tarjetas.map((t) => ({
           id: t.id,
-          title: t.titulo
-        }))
-      }))
+          title: t.titulo,
+        })),
+      })),
     };
 
     res.render("dashboard", {
       title: "Dashboard",
-      board
+      board,
     });
-
   } catch (error) {
     console.error(error);
     res.send("Error cargando dashboard");
@@ -114,7 +112,7 @@ app.get("/dashboard", async (req, res) => {
 });
 
 /*🔌 API (placeholder) */
-app.use("/api", require("./routes/api")); 
+app.use("/api", require("./routes/api"));
 // ⚠️ este archivo lo crearemos ahora
 
 verificarConexion();
