@@ -23,6 +23,12 @@ KanbanPRO is a powerful and intuitive project management tool designed to help t
 - **Progress Tracking**: Visualize your project's progress with intuitive charts and reports.
 - **Integrations**: Connect KanbanPRO with your favorite tools like Slack, Google Drive, and more.
 
+## Technologies Used:
+- **Frontend**: React, Redux, Material-UI
+- **Backend**: Node.js, Express
+- **Database**: PostreSQL
+- **Authentication**: JWT (JSON Web Tokens)
+
 ## Installation
 To get started with KanbanPRO, follow these steps:
 1. Clone the repository:
