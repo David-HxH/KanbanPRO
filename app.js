@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 /* HANDLEBARS */
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
-hbs.registerPartials(path.join(__dirname, "views"));
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 hbs.registerHelper("eq", (a, b) => a === b);
 
 /* 📄 RUTAS DE VISTAS */

@@ -10,6 +10,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f8;
     color: #2d2d2d;
@@ -55,6 +58,7 @@ nav a:hover {
 ========================= */
 main {
     padding: 24px;
+    flex: 1;
 }
 
 .center-text {
@@ -178,11 +182,34 @@ button:active {
     margin: 60px auto;
 }
 
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* =========================
+   valores para testeo
+========================= */
+.test-values {
+    margin-top: auto;
+    background: #e9ecef;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.test-values p {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #495057;
+}
+
 /* =========================
    FOOTER
 ========================= */
 footer {
-    background-color: #1f1f1f;
+    background-color: #007bff;
     color: white;
     padding: 12px;
     text-align: center;
