@@ -27,6 +27,14 @@ app.get("/", (req, res) => {
   res.render("home", { title: "Inicio" });
 });
 
+app.get("/register", (req, res) => {
+  res.render("register", { title: "Registro" });
+});
+
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
+
 app.get("/dashboard", verificarUsuario, async (req, res) => {
   try {
     const userId = req.usuario.id;
