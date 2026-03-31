@@ -126,9 +126,6 @@ app.use("/api", require("./routes/api"));
 // ⚠️ este archivo lo crearemos ahora
 
 verificarConexion();
-sequelize.sync({ alter: true });
-
-/* SERVER */
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  sequelize.sync({ alter: true });
+}
