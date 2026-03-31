@@ -1,18 +1,17 @@
+// app.js
 require("dotenv").config();
-const { verificarConexion } = require("./config/db");
-const { sequelize } = require("./config/db");
 const express = require("express");
 const path = require("path");
 const hbs = require("hbs");
-const { Tablero, Lista, Tarjeta } = require("./models");
-const { verificarUsuario } = require("./middlewares/auth.middleware");
 const cookieParser = require("cookie-parser");
+
+const { verificarUsuario } = require("./middlewares/auth.middleware");
+const { Tablero, Lista, Tarjeta } = require("./models");
+
 const app = express();
-const PORT = 3000;
 
+/* MIDDLEWARE */
 app.use(cookieParser());
-
-/* MIDDLEWARE GLOBAL */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -23,22 +22,9 @@ app.set("views", path.join(__dirname, "views"));
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 hbs.registerHelper("eq", (a, b) => a === b);
 
-/* 📄 RUTAS DE VISTAS */
+/* RUTAS */
 app.get("/", (req, res) => {
   res.render("home", { title: "Inicio" });
-});
-
-app.get("/register", (req, res) => {
-  res.render("register", { title: "Registro" });
-});
-
-app.get("/login", (req, res) => {
-  const error = req.query.error;
-
-  res.render("login", {
-    title: "Login",
-    error
-  });
 });
 
 app.get("/dashboard", verificarUsuario, async (req, res) => {
@@ -58,15 +44,12 @@ app.get("/dashboard", verificarUsuario, async (req, res) => {
       order: [[{ model: Lista, as: "listas" }, "orden", "ASC"]],
     });
 
-    // SI NO EXISTE → CREAR AUTOMÁTICAMENTE
     if (!tablero) {
-      // Crear tablero
       const nuevoTablero = await Tablero.create({
         titulo: "Mi tablero",
         userId,
       });
 
-      // Crear listas base
       const listasBase = [
         { titulo: "Pendiente", tipo: "todo" },
         { titulo: "En progreso", tipo: "doing" },
@@ -76,13 +59,12 @@ app.get("/dashboard", verificarUsuario, async (req, res) => {
       await Lista.bulkCreate(
         listasBase.map((lista, index) => ({
           titulo: lista.titulo,
-          tipo: lista.tipo, // 🔥 también aquí
+          tipo: lista.tipo,
           tableroId: nuevoTablero.id,
           orden: index,
         }))
       );
 
-      // Volver a consultar con relaciones
       tablero = await Tablero.findOne({
         where: { id: nuevoTablero.id },
         include: {
@@ -97,7 +79,6 @@ app.get("/dashboard", verificarUsuario, async (req, res) => {
       });
     }
 
-    // TRANSFORMACIÓN (clave)
     const board = {
       name: tablero.titulo,
       lists: tablero.listas.map((lista) => ({
@@ -115,17 +96,14 @@ app.get("/dashboard", verificarUsuario, async (req, res) => {
       title: "Dashboard",
       board,
     });
+
   } catch (error) {
     console.error(error);
     res.send("Error cargando dashboard");
   }
 });
 
-/*🔌 API (placeholder) */
+/* API */
 app.use("/api", require("./routes/api"));
-// ⚠️ este archivo lo crearemos ahora
 
-verificarConexion();
-if (process.env.NODE_ENV !== "production") {
-  sequelize.sync({ alter: true });
-}
+module.exports = app;
