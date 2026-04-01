@@ -8,12 +8,12 @@
 KanbanPRO is a powerful and intuitive project management tool designed to help teams organize their work efficiently. With its user-friendly interface and customizable features, KanbanPRO allows you to visualize your workflow, track progress, and collaborate seamlessly with your team members. Whether you're managing a small project or a large team, KanbanPRO provides the tools you need to stay organized and productive.
 
 <p align="center">
-  <a href="https://github.com/yourusername/kanbanpro">
+  <a href="https://kanban-pro-gamma.vercel.app/login">
     <img src="https://img.shields.io/github/stars/yourusername/kanbanpro?style=social" alt="GitHub stars">
   </a>
-  <a href="https://github.com/yourusername/kanbanpro">
+  <!-- <a href="https://github.com/yourusername/kanbanpro">
     <img src="https://img.shields.io/github/forks/yourusername/kanbanpro?style=social" alt="GitHub forks">
-  </a>
+  </a> -->
 </p>
 
 ## Features
@@ -33,11 +33,11 @@ KanbanPRO is a powerful and intuitive project management tool designed to help t
 To get started with KanbanPRO, follow these steps:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/kanbanpro.git
+   git clone https://github.com/David-HxH/KanbanPRO.git
    ```
 2. Navigate to the project directory:
    ```bash
-    cd kanbanpro
+    cd KanbanPRO
     ```
 3. Install the dependencies:
    ```bash
@@ -62,12 +62,11 @@ If you have any questions or feedback about KanbanPRO, please feel free to reach
 We would like to thank all the contributors who have helped make KanbanPRO a great project. Your support and contributions are greatly appreciated!
 
 ## Demo
-You can see a live demo of KanbanPRO at [https://kanbanpro-demo.com](https://kanbanpro-demo.com). Feel free to explore the features and provide feedback!
+You can see a live demo of KanbanPRO at [https://kanban-pro-gamma.vercel.app/login](https://kanban-pro-gamma.vercel.app/login). Feel free to explore the features and provide feedback!
 ## Screenshots
 Here are some screenshots of KanbanPRO in action:
-![Screenshot 1](./screenshot1.png)
-![Screenshot 2](./screenshot2.png)
-![Screenshot 3](./screenshot3.png)
+![Screenshot 1](./images/portada-kanabanpro.png)
+![Screenshot 2](./images/login-kanabanpro.png)
 
 ---
 
