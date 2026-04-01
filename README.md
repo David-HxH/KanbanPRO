@@ -65,8 +65,8 @@ We would like to thank all the contributors who have helped make KanbanPRO a gre
 You can see a live demo of KanbanPRO at [https://kanban-pro-gamma.vercel.app/login](https://kanban-pro-gamma.vercel.app/login). Feel free to explore the features and provide feedback!
 ## Screenshots
 Here are some screenshots of KanbanPRO in action:
-![Screenshot 1](./images/portada-kanbanpro.png)
-![Screenshot 2](./images/login-kanbanpro.png)
+![Portada](./public/images/portada-kanbanpro.png)
+![Login](./public/images/login-kanbanpro.png)
 
 ---
 
